@@ -1,6 +1,3 @@
-import dotenv from "dotenv";
-dotenv.config({ path: "../.env" });
-
 import express, { Request, Response } from "express";
 import { pool } from "./db.js";
 
