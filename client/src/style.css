@@ -1,0 +1,98 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap");
+
+:root {
+  font-family: "DM Sans", sans-serif;
+  color: #172033;
+  background: #f5f7fb;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* { box-sizing: border-box; }
+
+body { margin: 0; min-width: 320px; min-height: 100vh; }
+
+.page-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 40px 20px;
+  background: radial-gradient(circle at top left, #e6edff 0, transparent 34%), #f5f7fb;
+}
+
+.contact-card {
+  width: min(100%, 620px);
+  padding: clamp(28px, 6vw, 52px);
+  background: #fff;
+  border: 1px solid #e8ecf4;
+  border-radius: 22px;
+  box-shadow: 0 22px 70px rgba(31, 48, 82, 0.09);
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  color: #526bd8;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+}
+
+h1 {
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(2.2rem, 7vw, 3.1rem);
+  letter-spacing: -0.055em;
+}
+
+.intro { margin: 12px 0 30px; color: #657087; line-height: 1.7; }
+
+form { display: grid; gap: 19px; }
+.field { display: grid; gap: 8px; }
+
+label { font-size: 0.9rem; font-weight: 600; }
+
+input, textarea {
+  width: 100%;
+  border: 1px solid #dce2ed;
+  border-radius: 10px;
+  padding: 13px 14px;
+  color: #172033;
+  background: #fff;
+  font: inherit;
+  outline: none;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+input:focus, textarea:focus {
+  border-color: #526bd8;
+  box-shadow: 0 0 0 3px rgba(82, 107, 216, 0.13);
+}
+
+textarea { resize: vertical; }
+.hint { color: #8791a4; font-size: 0.75rem; text-align: right; }
+
+button {
+  border: 0;
+  border-radius: 10px;
+  padding: 15px 20px;
+  color: white;
+  background: #405bd0;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 150ms ease, transform 150ms ease;
+}
+
+button:hover:not(:disabled) { background: #3049b6; transform: translateY(-1px); }
+button:disabled { cursor: wait; opacity: 0.7; }
+
+.feedback { margin: 0; padding: 12px 14px; border-radius: 9px; font-size: 0.9rem; }
+.feedback.success { color: #17633e; background: #eaf8f0; }
+.feedback.error { color: #9d2c2c; background: #fff0f0; }
+
+.testing-note { margin: 24px 0 0; color: #929bad; font-size: 0.75rem; text-align: center; }
+
+@media (max-width: 480px) {
+  .page-shell { padding: 18px 12px; }
+  .contact-card { border-radius: 16px; }
+}
