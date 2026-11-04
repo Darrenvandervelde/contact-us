@@ -1,9 +1,22 @@
 import express, { Request, Response } from "express";
+import cors from "cors";
 import { pool } from "./db.js";
 
 const app = express();
-const port = Number(process.env.PORT) || 3001;
+const allowedOrigins = (process.env.CLIENT_ORIGIN || "http://localhost:5173")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
 
+app.use(cors({
+  origin(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+      return;
+    }
+    callback(new Error("This website is not allowed to access the contact API."));
+  }
+}));
 app.use(express.json({ limit: "10kb" }));
 
 type ContactPayload = {
@@ -55,24 +68,4 @@ app.post("/api/contact", async (request: Request, response: Response) => {
   }
 });
 
-async function start() {
-  await pool.query(`
-    CREATE TABLE IF NOT EXISTS contact_messages (
-      id BIGSERIAL PRIMARY KEY,
-      name VARCHAR(100) NOT NULL,
-      email VARCHAR(254) NOT NULL,
-      subject VARCHAR(150) NOT NULL,
-      message TEXT NOT NULL,
-      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-    )
-  `);
-
-  app.listen(port, () => {
-    console.log(`Contact API listening on http://localhost:${port}`);
-  });
-}
-
-start().catch((error: unknown) => {
-  console.error("Could not start the API:", error);
-  process.exit(1);
-});
+export default app;
