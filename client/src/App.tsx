@@ -14,6 +14,8 @@ const initialForm: ContactForm = {
   message: ""
 };
 
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || "").replace(/\/$/, "");
+
 export default function App() {
   const [form, setForm] = useState<ContactForm>(initialForm);
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
@@ -31,7 +33,7 @@ export default function App() {
     setFeedback("");
 
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch(`${API_BASE_URL}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form)
